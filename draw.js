@@ -106,8 +106,17 @@ function drawLubasAndMoldings(ctx, inputWidth, rectWidth, rectHeight, startX, st
       if (i == numberOfMoldings - 1 && inputWidth % moldingWidthReal != 0) {
         ctx.strokeStyle = 'red';
       }
+    
+      ctx.beginPath();
+      ctx.moveTo(startX + i * (rectWidth * (moldingWidthReal / inputWidth)), startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio));
+      ctx.lineTo(startX + i * (rectWidth * (moldingWidthReal / inputWidth)), startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio)+rectHeight * (moldingHeightReal / heightRatio));
+      ctx.stroke();
 
-      ctx.strokeRect(startX + i * (rectWidth * (moldingWidthReal / inputWidth)), startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio), moldingWidth, rectHeight * (moldingHeightReal / heightRatio));
+
+
+
+      
+    //  ctx.strokeRect(startX + i * (rectWidth * (moldingWidthReal / inputWidth)), startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio), moldingWidth, rectHeight * (moldingHeightReal / heightRatio));
     }, (numberOfLubas + i) * delay);
   }
 }
