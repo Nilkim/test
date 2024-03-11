@@ -58,10 +58,16 @@
       if (customCutKit === 0) {
         createDynamicResult('콘센트 시공 루바 커팅 필요시 구매추천.', true);
       }
-      createDynamicResult('초배테이프 : ' + doubleSidedTape + '개');
-      createDynamicResult("상, 중, 하 3줄 기준.", true);
-      createDynamicResult('실리콘 : ' + silicone + '개');
-      createDynamicResult("초배테이프가 잘 붙는 벽에는 불필요.", true);
+      // 엘리먼트 생성
+      var br = document.createElement("br");
+      // 생성된 엘리먼트 추가
+      document.getElementById('result_calculator').appendChild(br);
+
+      createDynamicResult('접착제품은');
+      createDynamicResult('기본적으로 초배테이프 : ' + doubleSidedTape + '개가 필요하고,');
+      //createDynamicResult("상, 중, 하 3줄 기준.", true);
+      createDynamicResult('벽면 상태에 따라 실리콘 : ' + silicone + '개가 추가로 필요합니다.');
+      //createDynamicResult("초배테이프가 잘 붙는 벽에는 불필요.", true);
     }
 
     function createDynamicResult(text, isIndented = false) {
