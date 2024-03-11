@@ -108,8 +108,8 @@ function drawLubasAndMoldings(ctx, inputWidth, rectWidth, rectHeight, startX, st
       }
     
       ctx.beginPath();
-      ctx.moveTo(startX + i * (rectWidth * (moldingWidthReal / inputWidth)), startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio));
-      ctx.lineTo(startX + i * (rectWidth * (moldingWidthReal / inputWidth)), startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio)+rectHeight * (moldingHeightReal / heightRatio));
+      ctx.moveTo(startX + i * (rectWidth * (moldingWidthReal / inputWidth))+ moldingWidth, startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio));
+      ctx.lineTo(startX + i * (rectWidth * (moldingWidthReal / inputWidth))+ moldingWidth, startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio)+rectHeight * (moldingHeightReal / heightRatio));
       ctx.stroke();
 
 
