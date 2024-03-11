@@ -66,57 +66,56 @@ function drawCanvas(inputWidth) {
 }
 
 function drawLubasAndMoldings(ctx, inputWidth, rectWidth, rectHeight, startX, startY, heightRatio) {
-  // 루바 그리기
+  // 루바 변수
   var lubaRealWidth = 80; // 루바 실제 가로
   var lubaHeight = rectHeight * (1000 / heightRatio); // 캔버스 상의 루바 세로 길이
   var numberOfLubas = Math.floor(inputWidth / lubaRealWidth); // 필요한 루바 개수 계산
   var lubaWidth = rectWidth * (lubaRealWidth / inputWidth); // 캔버스 상의 루바 가로 길이
 
-  // 몰딩 그리기 설정
+  // 몰딩 변수
   var moldingWidthReal = 1200; // 몰딩 실제 가로
   var moldingHeightReal = 40; // 몰딩 실제 높이
   var numberOfMoldings = Math.ceil(inputWidth / moldingWidthReal); // 전체 몰딩 개수
   var totalDrawingElements = numberOfLubas + numberOfMoldings; // 그리는 요소의 총 개수
   var delay = 3000 / totalDrawingElements; // 전체 그리는 시간을 요소의 총 개수로 나눔
 
+  // 루바그리기
   for (let i = 0; i < numberOfLubas; i++) {
     setTimeout(() => {
+
       ctx.fillStyle = '#cc9933'; // 루바 색상
+
+
       ctx.fillRect(startX + i * lubaWidth, startY + rectHeight - lubaHeight, lubaWidth, lubaHeight);
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 0.5;
+      ctx.lineWidth = 0.2;
       ctx.strokeRect(startX + i * lubaWidth, startY + rectHeight - lubaHeight, lubaWidth, lubaHeight);
     }, i * delay);
   }
+  //필름 그리기
+  if (inputWidth % lubaRealWidth != 0) {
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(startX + rectWidth, startY + rectHeight, -1 * lubaWidth * 12 / 8, -1 * lubaHeight);
+  }
 
-
-
-  // if (inputWidth%lubaRealWidth!=0 ){
-  //         ctx.strokeStyle = 'red'; 
-  //         ctx.strokeRect(startX + numberOfLubas * lubaWidth, startY + rectHeight - lubaHeight, startX + rectWidth, startY + rectHeight);
-  //         }
+  // 몰딩그리기
 
   for (let i = 0; i < numberOfMoldings; i++) {
     setTimeout(() => {
       var moldingWidth = (i < numberOfMoldings - 1) ? rectWidth * (moldingWidthReal / inputWidth) : rectWidth - (numberOfMoldings - 1) * (rectWidth * (moldingWidthReal / inputWidth));
       ctx.fillStyle = '#cc6633'; // 몰딩 색상
+      if (i == numberOfMoldings - 1 && inputWidth % moldingWidthReal != 0) {
+        ctx.fillStyle = 'red';
+      }
+
       ctx.fillRect(startX + i * (rectWidth * (moldingWidthReal / inputWidth)), startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio), moldingWidth, rectHeight * (moldingHeightReal / heightRatio));
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = 0.8;
-      if (i == numberOfMoldings - 1 && inputWidth % moldingWidthReal != 0) {
-        ctx.strokeStyle = 'red';
-      }
-    
-      ctx.beginPath();
-      ctx.moveTo(startX + i * (rectWidth * (moldingWidthReal / inputWidth))+ moldingWidth, startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio));
-      ctx.lineTo(startX + i * (rectWidth * (moldingWidthReal / inputWidth))+ moldingWidth, startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio)+rectHeight * (moldingHeightReal / heightRatio));
-      ctx.stroke();
+      ctx.strokeRect(startX + i * (rectWidth * (moldingWidthReal / inputWidth)), startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio), moldingWidth, rectHeight * (moldingHeightReal / heightRatio));
 
 
 
 
-      
-    //  ctx.strokeRect(startX + i * (rectWidth * (moldingWidthReal / inputWidth)), startY + rectHeight - lubaHeight - rectHeight * (moldingHeightReal / heightRatio), moldingWidth, rectHeight * (moldingHeightReal / heightRatio));
+
     }, (numberOfLubas + i) * delay);
   }
 }
